@@ -3,10 +3,9 @@ layout: post
 title: Vietnam AI Startup - look back at 2019
 ---
 
-Vietnam AI Startup: look back at 2019
-=====================================
-
 I came back to Vietnam since July 2019. During that time, I had chances to work at two tech startups, LOGIVAN and Waves. Before that, I have spent more than 9 years in Japan for studying, researching, and working.
+
+Origin blog: https://medium.com/@tran.vuanh.cs/vietnam-ai-look-back-at-2019-fef033b2608b
 
 This blog is just my personal view about Vietnam AI and tech companies within my network. This write will not go deep into anything, but give an overview to trending and community development last year in Vietnam.\
 Update: *I didn't expect this will catch a lot of attentions, so I would like to clarify several points:\
