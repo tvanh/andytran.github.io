@@ -1,0 +1,40 @@
+---
+layout: post
+title: Using face-recognition algorithm to power recommendations in the logistics business
+---
+
+Just a few years ago, when I wanted to watch a movie online, I had to make a great deal of effort to pick the right movie to watch (well, I am pretty picky about movies). Search Google, check IMDB ratings, read the plot, check out the director and the main actors, perhaps even watch the trailer to ensure that those movies matched my particular tastes.
+Today, Netflix does all that for me. When I open Netflix, I get new movie recommendations that most often accurately match my likes. What powers machine-generated recommendations are Recommender Systems, algorithms that exploit Artificial Intelligence and Big Data to recommend new items to users.
+
+![Life is too short for…](https://miro.medium.com/max/750/0*Nme1CIy5cwi4B456.jpg)
+
+#Recommender systems everywhere …
+Nowadays, recommender systems are everywhere: Netflix recommends you what movie to watch tonight, Youtube suggests you the next video to play, Spotify creates whole playlists based on your music taste, Amazon displays what new products you may want to buy, Facebook shows you people you may want to make friends with. Even those annoying ads that pop up while you browse through websites … they are tailored to your specific profile by a recommender system. These online businesses do not bother making an effort to recommend you new things just to make your life easier. They highly benefit from it. The figure below shows more statistics about the business impact of recommender systems.
+
+![Recommender systems have a great business impact](https://miro.medium.com/max/1050/0*PA9Khd_W2aQ2sbfk)
+
+#REEL: Recommender system for logistics
+At LOGIVAN, we aim at being much more than simply a trucking company, and as such we are employing state of the art algorithms to build a tailor-made recommender system for the logistics business, that we named REEL (REcommender Engine for Logistics). Our final goal is that of creating a smooth and effortless flow between goods owners and truck owners.
+When good owners want to have their goods delivered, they simply have to post an order on the app, including the shipment details, and the time and place of the pickup and destination. REEL’s job is to match the right truck driver for this order. Or, vice-versa, getting the right orders for a particular driver.
+The data for logistics recommendation is quite unique and diversity. We have shipment details, driver activity history, truck requirement, time and location related conditions, and so much more. And, we found a novel way to deal with this kind of data.
+#Using face-recognition algorithms to build a recommender system
+We combined principles of content-based approaches and face-recognition algorithms to build a unique kind of recommender system to solve our particular problem. Face-recognition, did you say? Yes.
+
+![Face-recognition using embedding and triplet loss](https://miro.medium.com/max/1050/0*BbczzV3HkwIC39w5.png)
+
+Face-recognition tasks involve recognizing whether or not two images represent the same person. To do so, state-of-the-art Deep Learning algorithms are able to transform images into a series of numbers, which are called an ‘embedding’ representing an image in the Euclidean space, so the embedding of images of the same person are closer to each other than the embedding of images of different people. We used this same principle to ‘embed’ drivers and orders using a Deep Learning neural network, and find the orders that are ‘closer’ to a particular driver, or, vice-versa, drivers that are ‘closer’ to a particular order.
+This system works well in our particular case because it can learn the best representations of orders and drivers based on whatever data we have available in our database, and apply them to new orders and drivers, thus solving the ‘cold-start’ problem, as long as at least some information about the the order and the driver is available.
+#Preliminary Results
+REEL is still a baby, and it has not been fully implemented yet. However, test results are promising. We tested it on about 1000 drivers unseen by the model. For each of them, we took one order they had bid in the past (the ‘positive’ sample), and 15 orders they had not bid (the ‘negative’ sample). To make the task more difficult for the algorithm, we ensured that the negative sample was made of orders that drivers could have possibly accepted (i.e., they were not too far from their current location and the cargo weight could have been carried by the driver’s truck).
+As shown in the table below, REEL was able to recommend the ‘positive’ order among the top 5 (over 15 total orders per driver) 89% of the times (hit rate). The average position of the ‘positive’ was between 2nd and 3rd over 15 (ranking score). When given a pair of orders for a driver, one positive and one negative, REEL was able to classify them with 75% accuracy (accuracy score) and the percentage of positives identified correctly was 95% (recall score).
+
+![Test results on 1000 random drivers](https://miro.medium.com/max/941/1*WWvoH9D-AGnc_7TRlHzzMg.png)
+
+For a more visual evaluation, we picked 10 random drivers and we asked REEL to sort 1000 orders in terms of how much each driver will be likely to accept them. We plotted on a map the routes that were run by the driver in the past (in black), the top 10 routes recommended by REEL (in red), the second top 10 (in green), and the bottom 10 (in blue). The driver location is displayed as a yellow circle.
+
+![Routes recommended by REEL. Routes run by the driver in the past are displayed as black arrows; the top 10 routes recommended by REEL are displayed in red, and the second top 10 are displayed in green. The routes not recommended are in blue.](https://miro.medium.com/max/1050/1*zEfwIBhEE-Ic1xd3z-B9IQ.png)
+
+We can see that for the first driver, who only accepted orders in the south, REEL correctly recommended orders in the south and did not recommend orders in the north, and vice-versa for the second and third driver. Moreover, REEL was able to recommend orders containing new routes, that is, routes that had not been explored before by the driver. This suggests that REEL has not merely learned to repeat the activity history of the driver, but has been able to recommend new, interesting routes that the driver may have not been able to discover by himself through manual search through the application.
+The benefits of LOGIVAN’s recommender system
+We are confident that REEL will enable drivers to find more interesting orders than what they would have by manually searching through the application. REEL will reduce human input and accelerate work, as there will be no longer need for people devoted to selecting suitable orders for drivers. This means no middlemen, and thus surcharges reduction and increased transparency. Most importantly, REEL will create a smooth flow between good owners and drivers thanks to complete automation, and critically reduce the time between posting an order and sending that order to the right driver.
+This blog was written by Enrico, a data scientist at LOGIVAN and edited by me, lead of LGV data science team Vu Anh. In previous article, we talked about how LOGIVAN is going to tackle logistics challenges. I hope you guys will be in love with our AI-based services. See you guys in next posts.
